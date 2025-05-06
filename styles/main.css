@@ -1,0 +1,158 @@
+@import 'style.css';
+
+
+.value-display {
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 12px;
+  color: var(--accent-color);
+  width: 40px;
+  text-align: right;
+}
+
+.control-button {
+  background-color: var(--accent-color);
+  color: var(--bg-primary);
+  border: none;
+  border-radius: 4px;
+  padding: 8px 12px;
+  margin: 5px 0;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s ease;
+}
+
+.control-button:hover {
+  background-color: var(--accent-color);
+  opacity: 0.8;
+}
+
+.control-button:active {
+  transform: scale(0.98);
+}
+
+.shape-info {
+  margin-top: 15px;
+}
+
+#shape-description {
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.4;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+#shape-description h4 {
+  color: var(--accent-color);
+  margin-bottom: 8px;
+  font-size: 16px;
+}
+
+#shape-description p {
+  margin-bottom: 8px;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--control-bg);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-color);
+  opacity: 0.8;
+}
+
+.preset-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.preset-button {
+  flex: 1;
+  min-width: 70px;
+  padding: 5px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.footer {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  color: var(--text-secondary);
+  font-size: 12px;
+  z-index: 900;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.footer:hover {
+  opacity: 1;
+}
+
+.footer a {
+  color: var(--accent-color);
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.hide-controls #controls {
+  transform: translateX(calc(100% - 40px));
+}
+
+@keyframes toastFadeIn {
+  from { opacity: 0; transform: translateY(-20px) translateX(-50%); }
+  to { opacity: 1; transform: translateY(0) translateX(-50%); }
+}
+
+@keyframes toastFadeOut {
+  from { opacity: 1; transform: translateY(0) translateX(-50%); }
+  to { opacity: 0; transform: translateY(-20px) translateX(-50%); }
+}
+
+.toast.show {
+  animation: toastFadeIn 0.3s forwards, toastFadeOut 0.3s forwards 2.7s;
+}
+
+@media (max-height: 600px) {
+  #shape-description {
+    max-height: 120px;
+  }
+  
+  .control-group {
+    padding-bottom: 8px;
+    margin-bottom: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  #controls {
+    width: 80%;
+    max-width: 280px;
+  }
+  
+  .control-button {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  
+  .footer {
+    font-size: 10px;
+  }
+}

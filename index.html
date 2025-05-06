@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Visualizador 3D - Luis Brasil</title>
+    <link rel="stylesheet" href="styles/main.css" />
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <meta
+      name="description"
+      content="Uma ferramenta interativa de visualização 3D para explorar formas e superfícies matemáticas"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="images/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="images/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="images/favicon-16x16.png"
+    />
+    <link rel="manifest" href="images/site.webmanifest" />
+  </head>
+  <body>
+    <div class="loader">
+      <div class="spinner"></div>
+    </div>
+
+    <div class="toast" id="toast-notification"></div>
+
+    <div class="instruction-overlay" id="instruction-overlay">
+      <p>Clique em um objeto para selecioná-lo</p>
+    </div>
+
+    <div id="controls">
+      <div class="hidden">
+        <button id="toggle-panel"><i class="fas fa-chevron-left"></i></button>
+        <button id="mode-toggle"><i class="fas fa-moon"></i></button>
+      </div>
+      <div class="control-group">
+        <br /><br />
+        <h3>CONTROLES DE FORMA</h3>
+        <div class="control-item">
+          <label class="control-label">Forma</label>
+          <select id="shape">
+            <option value="cube" selected>Cubo</option>
+            <option value="cylinder">Cilindro</option>
+            <option value="cone">Cone</option>
+            <option value="sphere">Esfera</option>
+          </select>
+        </div>
+        <div class="control-item">
+          <label class="control-label">Escala</label>
+          <input
+            type="range"
+            id="scale"
+            min="0.5"
+            max="5"
+            step="0.1"
+            value="1"
+          />
+          <span class="value-display" id="scale-value">1.0</span>
+        </div>
+        <div class="control-item hidden">
+          <label class="control-label">Segmentos</label>
+          <input
+            type="range"
+            id="segments"
+            min="3"
+            max="64"
+            step="1"
+            value="32"
+          />
+          <span class="value-display" id="segments-value">32</span>
+        </div>
+      </div>
+
+      <div class="hidden control-group">
+        <h3>Controles de Animação</h3>
+        <div class="control-item">
+          <label class="hidden control-label">Velocidade de Rotação</label>
+          <input
+            type="range"
+            id="speed"
+            min="0"
+            max="0.05"
+            step="0.001"
+            value="0"
+          />
+          <span class="value-display" id="speed-value">0.0</span>
+        </div>
+        <div class="hidden control-item">
+          <label class="control-label">Direção</label>
+          <select id="direction">
+            <option value="all">Todos os Eixos</option>
+            <option value="x">Apenas X</option>
+            <option value="y">Apenas Y</option>
+            <option value="z">Apenas Z</option>
+            <option value="xy">X + Y</option>
+            <option value="xz">X + Z</option>
+            <option value="yz">Y + Z</option>
+            <option value="custom">Caminho Personalizado</option>
+            <option value="none">Parar</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <h3>Controles de Material</h3>
+        <div class="control-item hidden">
+          <label class="control-label">Tipo de Material</label>
+          <select id="materialType">
+            <option value="standard">Padrão</option>
+            <option value="phong">Phong</option>
+            <option value="physical">Físico</option>
+            <option value="toon">Cartoon</option>
+            <option value="gradient">Gradiente de Altura</option>
+            <option value="normal">Baseado em Normal</option>
+            <option value="wireframe">Estrutura de Arame</option>
+          </select>
+        </div>
+        <div class="control-item">
+          <label class="control-label">Cor Primária</label>
+          <input type="color" id="color" value="#e100ff" />
+        </div>
+        <div class="control-item hidden">
+          <label class="control-label">Cor Secundária (para gradientes)</label>
+          <input type="color" id="color2" value="#ff00ff" />
+        </div>
+        <div class="control-item hidden">
+          <label class="control-label">Metalicidade</label>
+          <input
+            type="range"
+            id="metalness"
+            min="0"
+            max="1"
+            step="0.1"
+            value="0.5"
+          />
+          <span class="value-display" id="metalness-value">0.5</span>
+        </div>
+        <div class="control-item hidden">
+          <label class="control-label">Rugosidade</label>
+          <input
+            type="range"
+            id="roughness"
+            min="0"
+            max="1"
+            step="0.1"
+            value="0.5"
+          />
+          <span class="value-display" id="roughness-value">0.5</span>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <h3>Controles de Cena</h3>
+        <div class="control-item">
+          <label class="control-label">Cor de Fundo</label>
+          <input type="color" id="bg-color" value="#000000" />
+        </div>
+        <div class="control-item">
+          <button id="reset-camera" class="control-button">
+            Resetar Câmera
+          </button>
+          <button id="reset-all" class="control-button">
+            Resetar Configurações
+          </button>
+        </div>
+      </div>
+
+      <div class="control-group hidden">
+        <div class="shape-info">
+          <h3>Informações da Forma</h3>
+          <div id="shape-description">
+            Selecione uma forma para ver informações sobre ela.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Biblioteca Three.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.umd.js"></script>
+
+    <!-- JavaScript Personalizado -->
+    <script type="module" src="scripts/app.js"></script>
+  </body>
+</html>
