@@ -6,7 +6,6 @@ Uma ferramenta interativa para visualização e manipulação de formas 3D em te
 
 - **Seleção de Formas**: Escolha entre formas básicas como cubo, cilindro, cone e esfera.
 - **Personalização**: Ajuste escala, segmentos e cores.
-- **Animações**: Controle a velocidade e direção de rotação.
 - **Modo Claro/Escuro**: Alterne entre os modos de exibição.
 
 ## Como Usar
@@ -21,17 +20,12 @@ Uma ferramenta interativa para visualização e manipulação de formas 3D em te
    - Ajuste a escala da forma com o controle deslizante de **Escala**.
    - Modifique o número de segmentos com o controle deslizante de **Segmentos**.
 
-3. **Animação**:
-
-   - Controle a velocidade de rotação com o controle deslizante de **Velocidade de Rotação**.
-   - Escolha a direção de rotação no menu suspenso de **Direção**.
-
-4. **Personalização de Material**:
+3. **Personalização de Material**:
 
    - Escolha a cor primária da forma usando o seletor de cores.
    - Ajuste a cor de fundo da cena com o seletor de **Cor de Fundo**.
 
-5. **Interface**:
+4. **Interface**:
    - Alterne entre o modo claro e escuro clicando no ícone de lua/sol.
    - Recolha ou expanda o painel de controle clicando no ícone de seta.
    - Restaure a posição da câmera ou redefina todas as configurações usando os botões de controle.
@@ -61,9 +55,7 @@ Uma ferramenta interativa para visualização e manipulação de formas 3D em te
 ## Como Executar
 
 1. Clone o repositório:
-   ```bash
-   git clone https://github.com/seu-usuario/ShapeMorpher.git
-   ```
+
 2. Navegue até o diretório do projeto:
    ```bash
    cd ShapeMorpher
@@ -78,6 +70,3 @@ Uma ferramenta interativa para visualização e manipulação de formas 3D em te
 - **Font Awesome**: Ícones para a interface.
 
 ---
-
-> _"A geometria é a linguagem da beleza do universo."_  
-> — Johannes Kepler
